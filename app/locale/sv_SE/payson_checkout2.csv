@@ -1,0 +1,60 @@
+"Payson", "Payson"
+
+"Order was canceled at Payson.", "Beställningen avbröts hos Payson"
+"The payment was successfully completed at Payson.", "Betalningen är avklarad hos Payson"
+"Payson is not ready to cancel the order. Please try again later", "Payson är inte redo att avbryta ordern. Var god försök igen"
+"Your payment is being processed by Payson.", "Er betalning är under behandling hos Payson"
+"The payment was denied by Payson.", "Betalningen blev nekad."
+"Something went wrong with the payment.", "Något gick fel med betalningen."
+"The payment was expired by Payson.", "Betalningen har utgått hos Payson."
+"Payson completed the order payment.", "Betalningen är avklarad hos Payson"
+"The payment is completed on site through Payson's web form", "Betalningen slutförs direkt på sidan genom Paysons webbformulär"
+"Money have been paid to account by Payson.", "Payson har betalat ut pengar till konto"
+"Order has been marked as shipped at Payson.", "Betsällningen har blivit markerad som skickad hos Payson"
+"Payment was credited at Payson", "Betalningen blev krediterad hos Payson"
+"Unable to ship order: %s. It must have status ""readyToShip"" but it´s current status is: ""%s"".", "Kunde inte skicka order: %s. Den måste ha status ""readyToShip"" men nuvarande status är: ""%s""."
+"Unable to ship order: %s. No Payson checkout ID was found.", "Kunde inte skicka order: %s. Hittade inget Payson ID."
+"Unable to refund order: %s. It must have status ""shipped"" but it´s current status is: ""%s""", "Kunde inte kreditera order: %s. Den måste ha status ""paidToAccount"" men nuvarande status är: ""%s"""
+"Order from %s", "Order från %s"
+
+"White", "Vit"
+"Blue", "Blå"
+"Gray", "Grå"
+"White with text logos", "Vit med textloggor"
+"Gray with text logos", "Grå med textloggor"
+"Blue with text logos", "Blå med textloggor"
+
+"None", "Ingen"
+"BankID", "BankID"
+
+"Enabled", "Aktiverad"
+"Enable/disable payment with Payson", "Aktivera eller inaktivera betalning med Payson"
+
+"Test mode", "Testläge"
+"Enable when using a sandboxed test agent", "Aktivera för användning av testagent"
+
+"Agent ID", "Agent ID"
+"Agent ID is found on your Payson profile page", "Logga in på Paysons webbplats för att hämta ditt Agent ID"
+
+"API key", "API-nyckel"
+"API key is found on your Payson profile page", "Logga in på Paysons webbplats för att hämta din MD5-nyckel"
+
+"Terms and Conditions URL", "URL till köpvillkor"
+"These terms will be linked to by the payment form", "Betalningsformuläret kommer att länka till denna URL"
+
+"Color theme", "Färgtema"
+"The color theme of the checkout form", "Betalningsformulärets färgtema"
+
+"Extra customer verification", "Extra verifieringssteg"
+"An extra customer verification method", "Välj ett ett extra verifieringssteg"
+
+"Request phone", "Begär telefonnummer"
+"Require user to fill in phone number", "Kräv att användaren fyller i sitt telefonnummer"
+
+"Restore cart on cancel", "Återställ kundvagn vid avbryt"
+"Restore cart when customer cancel the payment", "Återställ kundvagnen när kunden avbryter betalningen"
+
+"Restore cart on error", "Återställ kundvagn vid fel"
+"Restore cart when status from Payson is error", "Återställ kundvagnen när det upstår ett fel hos Payson"
+
+"Fast checkout", "Gå till snabbkassan"

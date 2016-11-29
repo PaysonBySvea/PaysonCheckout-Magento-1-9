@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+     <modules>
+        <Payson_Checkout2>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Payson_Checkout2>
+     </modules>
+</config>

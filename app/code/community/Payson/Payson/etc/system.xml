@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <sections>
+        <payment>
+            <groups>
+                <payson_standard translate="label" module="payson">
+                    <label>Payson All in one Payment</label>
+                    <comment><![CDATA[Payson Invoice requires a separate contract. Please contact Payson for more information<a href="http://payson.se" target="_blank">Click here</a>]]></comment>
+                    <sort_order>-100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>                    
+                    <fields>
+                        <test_mode translate="label,comment">
+                            <label>Test mode</label>
+                            <comment>Enable/disable test mode.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </test_mode>
+                        <active translate="label,comment">
+                            <label>Enabled</label>
+                            <comment>Enable/disable payment with Payson.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <email translate="label,comment">
+                            <label>Email</label>
+                            <comment>Email address bound to your Payson account.</comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-email</validate>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </email>
+                        <agent_id translate="label,comment">
+                            <label>Agent ID</label>
+                            <comment>Agent ID is found on your Payson profile page.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </agent_id>
+                        <md5_key translate="label,comment">
+                            <label>API key</label>
+                            <comment>API key is found on your Payson profile page.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </md5_key>
+                        <payson_All_in_one translate="label">
+                            <label>Please select the payment method</label>
+                            <comment>Choose your prefered Payson payment</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>payson/system_config_source_paysondirectmethod</source_model>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </payson_All_in_one>
+                        <payment_guarantee translate="label,comment">
+                            <label>Enable payment guarantee</label>
+                            <comment>Enable/disable payment guarantee.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </payment_guarantee>                  
+                        <restore_on_cancel translate="label,comment">
+                            <label>Restore cart on cancel</label>
+                            <comment>Restore cart when customer cancel the payment</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </restore_on_cancel>
+                        <restore_on_error translate="label,comment">
+                            <label>Restore cart on error</label>
+                            <comment>Restore cart when status from Payson is error</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </restore_on_error>
+                        <show_receipt_page translate="label,comment">
+                            <label>Show receipt page</label>
+                            <comment>Here you can enable or disable our receipt page</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </show_receipt_page>
+                        <vat_discount translate="label,comment">
+                            <label>Enable average vat on discount</label>
+                            <comment>Enable/disable average vat on discount</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>250</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </vat_discount>
+                    </fields>
+                </payson_standard>
+                <payson_invoice translate="label" module="payson">
+                    <label>Payson invoice setup</label>
+                    <sort_order>-99</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[Payson Invoice requires a separate contract. Please contact Payson for more information<a href="http://payson.se" target="_blank">Click here</a>]]></comment>
+                    <fields>
+                        <active_invoice translate="label,comment">
+                            <label>Enabled</label>
+                            <comment>Enable/disable invoice payment with Payson.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active_invoice>
+                        <invoice_fee_tax translate="label,comment">
+                            <label>Invoice fee tax</label>
+                            <comment>Tax class for invoice fees.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_shipping_taxclass</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </invoice_fee_tax>
+                        <invoice_fee_sek translate="label,comment">
+                            <label>Invoice fee (SEK)</label>
+                            <comment>Input an invoice fee within the intervall of 0-40 including Vat.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </invoice_fee_sek>                                              
+                    </fields>
+                </payson_invoice>                
+            </groups>
+        </payment>
+    </sections>
+</config>

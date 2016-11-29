@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <checkout2_payment_index>
+        <remove name="right"/>
+        <reference name="content">
+            <block type="checkout2/payment" name="payson.checkout2.payment.standard" template="payson/checkout2/payment/standard.phtml" />
+        </reference>
+    </checkout2_payment_index>
+
+    <checkout2_payment_confirmation>
+        <remove name="right"/>
+        <reference name="content">
+            <block type="checkout2/payment" name="payson.checkout2.payment.confirmation" template="payson/checkout2/payment/confirmation.phtml" />
+        </reference>
+    </checkout2_payment_confirmation>
+    
+    <checkout2_express_index>
+        <reference name="head">
+            <action method="addJs"><script>payson/checkout2/express.js</script></action>
+        </reference>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+            <action method="addBodyClass"><classname>payson-express</classname></action>
+            <action method="addBodyClass"><classname>opc</classname></action>
+        </reference>
+
+        <reference name="left">
+            <block type="checkout2/payment" name="payson.checkout2.shipping" template="payson/checkout2/form/shipping.phtml">
+                <block type="checkout/onepage_shipping_method_available" name="checkout.onepage.shipping_method.available" as="shipping_methods" template="checkout/onepage/shipping_method/available.phtml" />
+            </block>
+
+            <block type="checkout2/payment" name="payson.checkout2.review" template="payson/checkout2/form/review.phtml">
+	            <block type="checkout/onepage_review_info" name="order_review" template="checkout/onepage/review/info.phtml">
+		            <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/onepage/review/item.phtml</template></action>
+		            <block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>
+	        	</block>
+	        </block>
+        </reference>
+
+        <reference name="content">
+            <block type="checkout2/payment" name="payson.checkout2.payment.express" template="payson/checkout2/payment/express.phtml" />
+        </reference>
+    </checkout2_express_index>
+
+    <checkout2_express_update>
+    	<reference name="root">
+    		<action method="setTemplate"><template>payson/checkout2/page/blank.phtml</template></action>
+		</reference>
+
+        <reference name="content">
+			<remove name="product.tooltip" />
+
+			<block type="checkout2/payment" name="payson.checkout2.shipping" template="payson/checkout2/form/shipping.phtml">
+	            <block type="checkout/onepage_shipping_method_available" name="checkout.onepage.shipping_method.available" as="shipping_methods" template="checkout/onepage/shipping_method/available.phtml" />
+	        </block>
+
+	        <block type="checkout2/payment" name="payson.checkout2.review" template="payson/checkout2/form/review.phtml">
+	            <block type="checkout/onepage_review_info" name="order_review" template="checkout/onepage/review/info.phtml">
+		            <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/onepage/review/item.phtml</template></action>
+		            <block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>
+	        	</block>
+	        </block>
+	    </reference>
+    </checkout2_express_update>
+    
+    <checkout_cart_index>    
+        <reference name="checkout.cart.top_methods">
+            <block type="checkout2/payment" name="checkout.cart.methods.payson_checkout2.top" after="checkout.cart.methods.onepage.top" template="payson/checkout2/elements/button.phtml" />
+        </reference>
+
+        <reference name="checkout.cart.methods">
+            <block type="checkout2/payment" name="checkout.cart.methods.payson_checkout2.bottom" before="checkout.cart.methods.onepage.bottom" template="payson/checkout2/elements/button.phtml" />
+        </reference>
+    </checkout_cart_index>
+    
+    <default>
+        <reference name="cart_sidebar.extra_actions">
+            <block type="checkout2/payment" name="checkout.cart.methods.payson_checkout2.minicart" template="payson/checkout2/elements/minicartbutton.phtml" />
+        </reference>
+        
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/payson_checkout2/style.css</name></action>
+        </reference>
+    </default>
+</layout>

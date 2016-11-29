@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <sections>
+        <payment>
+            <groups>
+                <checkout2 translate="label" module="checkout2">
+                    <label>Payson Checkout2</label>                    
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>                    
+                    <fields>
+                        <active translate="label,comment">
+                            <label>Enabled</label>
+                            <comment>Enable/disable payment with Payson</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <test_mode translate="label,comment">
+                            <label>Test mode</label>
+                            <comment>Enable when using a sandboxed test agent</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </test_mode>
+                        <agent_id translate="label,comment">
+                            <label>Agent ID</label>
+                            <comment>Agent ID is found on your Payson profile page</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </agent_id>
+                        <md5_key translate="label,comment">
+                            <label>API key</label>
+                            <comment>API key is found on your Payson profile page</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </md5_key>
+                        <terms_and_conditions_url translate="label,comment">
+                            <label>Terms and Conditions URL</label>
+                            <comment>These terms will be linked to by the payment form</comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-entry</validate>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </terms_and_conditions_url>
+                        <color_theme translate="label,comment">
+                            <label>Color theme</label>
+                            <comment>The color theme of the checkout form</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>60</sort_order>
+                            <source_model>checkout2/themes</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </color_theme>
+                        <extra_verification translate="label,comment">
+                            <label>Extra customer verification</label>
+                            <comment>An extra customer verification method</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>70</sort_order>
+                            <source_model>checkout2/verificationTypes</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </extra_verification>
+                        <request_phone translate="label,comment">
+                            <label>Request phone</label>
+                            <comment>Require user to fill in phone number</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </request_phone>
+                        <restore_on_cancel translate="label,comment">
+                            <label>Restore cart on cancel</label>
+                            <comment>Restore cart when customer cancel the payment</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </restore_on_cancel>
+                        <restore_on_error translate="label,comment">
+                            <label>Restore cart on error</label>
+                            <comment>Restore cart when status from Payson is error</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </restore_on_error>
+                    </fields>
+                </checkout2>                       
+            </groups>
+        </payment>
+    </sections>
+</config>

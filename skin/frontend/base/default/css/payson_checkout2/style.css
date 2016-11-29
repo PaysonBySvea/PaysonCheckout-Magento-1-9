@@ -1,0 +1,45 @@
+.minicart-actions .checkout-types li:first-child {
+	margin-left: 5px;
+}
+
+.payson.button {
+	background-color: #ed8d37;
+}
+
+.payson.button:hover {
+	background-color: #ff9a3f;
+}
+
+.payson-express .col-left {
+	min-width: 350px;
+}
+
+.payson-express .col-main {
+	width: calc(100% - 350px);
+}
+
+.payson-express .col-main > * {
+	max-width: 680px;
+	margin: 0 auto;
+}
+
+.payson-express .col2-left-layout .main {
+    min-height: 565px;
+}
+
+.payson-shipping, .payson-review {
+	margin-bottom: 3em;
+	margin-bottom: 3em;
+}
+
+.payson-shipping > h3, .payson-review > h3 {
+	border-bottom: 1px solid rgb(237, 237, 237);
+	margin-bottom: 1em;
+}
+
+@media only screen and (max-width: 770px) {
+    .payson-express .col2-left-layout .main {
+         display: flex;
+         flex-direction: column-reverse;
+    }
+}
