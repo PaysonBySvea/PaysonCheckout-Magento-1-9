@@ -593,7 +593,13 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
             return null;
         }
 
-        $quote->collectTotals();
+        $addressData = $this->_udateShippingAddress($paysonCustomer);
+        
+        //Add address array to both billing AND shipping address.   
+        $quote->getBillingAddress()->addData($addressData);
+        $quote->getShippingAddress()->addData($addressData);
+    
+        $quote->collectTotals()->save();
         $service = Mage::getModel('sales/service_quote', $quote);
         $service->submitAll();
         $order = $service->getOrder();
@@ -633,5 +639,17 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
 
         $quote->getPayment()->setMethod('checkout2');
         $quote->setTotalsCollectedFlag(false)->collectTotals();
+    }
+
+    private function _udateShippingAddress($paysonCustomer) {
+            return array(
+                'firstname' => $paysonCustomer->firstName,
+                'lastname' => $paysonCustomer->lastName,
+                'street' => $paysonCustomer->street,
+                'city' => $paysonCustomer->city,
+                'postcode'=> $paysonCustomer->postalCode,
+                'telephone' => $paysonCustomer->phone,
+                'country_id' => $paysonCustomer->countryCode,
+        );
     }
 }

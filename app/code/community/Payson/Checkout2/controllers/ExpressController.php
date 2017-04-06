@@ -53,7 +53,7 @@ class Payson_Checkout2_ExpressController extends Mage_Core_Controller_Front_Acti
             case 'readyToShip':
             	Mage::getSingleton('core/session')->setCheckoutId($checkoutId);
 
-                $order = $this->_getOrderHelper()->convertQuoteToOrder();
+                $order = $this->_getOrderHelper()->convertQuoteToOrder($checkout->customer);
                 $order->setState(Mage_Sales_Model_Order::STATE_PROCESSING, true);
 
                 // Send order reference to Payson
@@ -73,7 +73,7 @@ class Payson_Checkout2_ExpressController extends Mage_Core_Controller_Front_Acti
 
             case 'created':
             case 'processingPayment':
-                $order = $this->_getOrderHelper()->convertQuoteToOrder();
+                $order = $this->_getOrderHelper()->convertQuoteToOrder($checkout->customer);
                 $order->setState(Mage_Sales_Model_Order::STATE_PENDING_PAYMENT, true);
 
                 // Send order reference to Payson
