@@ -74,5 +74,5 @@
         payson.contentWindow.postMessage('release', '*');
         isUpdating = false;
     }
-})($j, window.PaysonSettings = window.PaysonSettings || {});
+})(jQuery, window.PaysonSettings = window.PaysonSettings || {});
 

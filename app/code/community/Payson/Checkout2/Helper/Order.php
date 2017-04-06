@@ -212,7 +212,7 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         $termsUri        = $this->getConfig()->getTermsUrl();
         $paysonModuleInfo = self::MODULE_NAME . '|' . self::MODULE_VERSION . '|' . Mage::getVersion();
 
-        return new PaysonEmbedded\Merchant($checkoutUri, $confirmationUri, $notificationUri, $termsUri, 1, , $paysonModuleInfo);
+        return new PaysonEmbedded\Merchant($checkoutUri, $confirmationUri, $notificationUri, $termsUri, 1, $paysonModuleInfo);
     }
 
     /**
@@ -590,7 +590,7 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         return $this->_session;
     }
     
-    public function convertQuoteToOrder() {
+    public function convertQuoteToOrder($paysonCustomer) {
         $quote = Mage::getSingleton('checkout/cart')->getQuote();
 
         if (is_null($quote)) {
