@@ -9,6 +9,9 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
     protected $_api;
     protected $controlKey;
 
+    const MODULE_NAME = 'PaysonCheckout2.0_magento';
+    const MODULE_VERSION = '1.0.0.1'; 
+
     public function checkout() {
         $order = $this->getOrder();
 
@@ -207,8 +210,9 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         $confirmationUri = Mage::getUrl('checkout2/express/return', array('_secure' => true));
         $notificationUri = Mage::getUrl('checkout2/notification/notify', array('_secure' => true));
         $termsUri        = $this->getConfig()->getTermsUrl();
+        $paysonModuleInfo = self::MODULE_NAME . '|' . self::MODULE_VERSION . '|' . Mage::getVersion();
 
-        return new PaysonEmbedded\Merchant($checkoutUri, $confirmationUri, $notificationUri, $termsUri, 1);
+        return new PaysonEmbedded\Merchant($checkoutUri, $confirmationUri, $notificationUri, $termsUri, 1, , $paysonModuleInfo);
     }
 
     /**
