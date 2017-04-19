@@ -88,6 +88,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
 
         $checkoutId = $callPaysonApi->CreateCheckout($checkout);
         $quote->setData(Payson_Checkout2_Model_Order::CHECKOUT_ID_COLUMN, $checkoutId);
+        //Set the email to the gest account Information
+        $quote->setCustomerEmail($customer->email);
         $quote->save();
 
         $this->updateCheckoutControlKey($checkoutId);
