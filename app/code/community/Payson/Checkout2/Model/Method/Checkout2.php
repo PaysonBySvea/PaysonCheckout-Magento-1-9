@@ -2,7 +2,7 @@
 
 class Payson_Checkout2_Model_Method_Checkout2 extends Mage_Payment_Model_Method_Abstract
 {
-    protected $_code = 'payson_checkout2';
+    protected $_code = 'checkout2';
     protected $_formBlockType = 'checkout2/form_checkout2';
     protected $_infoBlockType = 'checkout2/info_checkout2';
 
@@ -22,6 +22,7 @@ class Payson_Checkout2_Model_Method_Checkout2 extends Mage_Payment_Model_Method_
     protected $_canReviewPayment = false;
     protected $_canCreateBillingAgreement = false;
     protected $_canManageRecurringProfiles = false; // true
+    
 
     /**
      * @inheritDoc
