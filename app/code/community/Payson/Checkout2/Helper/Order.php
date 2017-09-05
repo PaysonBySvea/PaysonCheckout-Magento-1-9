@@ -10,7 +10,7 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
     protected $controlKey;
 
     const MODULE_NAME = 'PaysonCheckout2.0_magento';
-    const MODULE_VERSION = '1.0.0.2'; 
+    const MODULE_VERSION = '1.0.0.3'; 
 
     public function checkout() {
         $order = $this->getOrder();
@@ -322,6 +322,32 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * Gets current lenguage
+     *
+     * @return string
+     */
+    protected function getLenguageCode() {
+        $locale = Mage::getSingleton('core/locale')->getLocaleCode();
+        $locale = substr($locale, 0, 2);
+
+        if (strtoupper($locale )) {
+            switch ($locale) {
+                case 'da':
+                case 'no': 
+                case 'se':
+                case 'sv':{
+                    $locale = 'se';
+                    break;
+                }
+                default: {
+                    $locale = 'en';
+                }
+            }
+        }
+        return $locale;
+    }
+
+    /**
      * Helper for checkout()
      *
      * @param	Mage_Sales_Model_Order_Item $item
@@ -493,7 +519,7 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         if(is_object($customer->getDefaultBillingAddress()))
             $countryCodeCustomer = $customer->getDefaultBillingAddress()->getCountry();
         else
-            $countryCodeCustomer = $this->getLocale();
+            $countryCodeCustomer = $this->getLenguageCode();
 
         $firstname = $testMode ? 'Tess T' : $customer->getFirstname();
         $lastname = $testMode ? 'Persson' : $customer->getLastname();
@@ -503,7 +529,7 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         $city = $testMode ? 'Stan' : '';
         $street = $testMode ? 'Testgatan' : '';
         $postCode = $testMode ? '99999' : '';
-        $country = $testMode ? $countryCodeCustomer : '';
+        $country = $testMode ? 'SE' : $countryCodeCustomer;
 
         if (!$testMode && $customer->getDefaultBilling()) {
             $billingAddress = Mage::getModel('customer/address')->load($customer->getDefaultBilling());
@@ -532,7 +558,7 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         if(is_object($customer->getDefaultBillingAddress()))
             $countryCodeCustomer = $customer->getDefaultBillingAddress()->getCountry();  
         else {
-            $countryCodeCustomer = $this->getLocale();
+            $countryCodeCustomer = $this->getLenguageCode();
         }
 
         $firstname = $testMode ? 'Tess T' : $customer->getFirstname();
@@ -543,7 +569,7 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         $city = $testMode ? 'Stan' : '';
         $street = $testMode ? 'Testgatan' : '';
         $postCode = $testMode ? '99999' : '';
-        $country = $testMode ? $countryCodeCustomer : '';
+        $country = $testMode ? 'SE': $countryCodeCustomer;
 
         if ($quote->getBillingAddress()) {
             $address = $quote->getBillingAddress();
