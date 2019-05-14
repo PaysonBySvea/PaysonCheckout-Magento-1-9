@@ -18,7 +18,6 @@ class Payson_Checkout2_NotificationController extends Mage_Core_Controller_Front
         } catch (Mage_Core_Exception $e) {
             Mage::logException($e);
             $response->setHttpResponseCode(503)->sendResponse();
-            exit;
         } catch (Exception $e) {
             Mage::logException($e);
             $response->setHttpResponseCode(500);

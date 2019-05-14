@@ -10,17 +10,16 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
     protected $controlKey;
 
     const MODULE_NAME = 'PaysonCheckout2.0_magento';
-    const MODULE_VERSION = '1.0.0.3'; 
 
     public function checkout() {
         $order = $this->getOrder();
 
         $checkoutId = $order->getData(Payson_Checkout2_Model_Order::CHECKOUT_ID_COLUMN);
 
-        if ($checkoutId) {
+        /*if ($checkoutId) {
             // Already have an active checkout
             return $this->getCheckout($checkoutId);
-        }
+        }*/
 
         $callPaysonApi = $this->getApi();
         $paysonMerchant = $this->_getMerchant();
