@@ -1,5 +1,4 @@
 <?php
-
 class Payson_Checkout2_Model_VerificationTypes
 {
     public function toOptionArray()

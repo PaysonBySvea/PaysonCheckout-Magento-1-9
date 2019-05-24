@@ -1,8 +1,8 @@
 <?php
-
 class Payson_Checkout2_Model_Observer 
 {
-    public function checkoutCartSaveAfter(Varien_Event_Observer $observer) {
+    public function checkoutCartSaveAfter(Varien_Event_Observer $observer)
+    {
         $helper = Mage::helper('checkout2/order');
         $event = $observer->getEvent();
         $cart = $observer->getEvent()->getCart();

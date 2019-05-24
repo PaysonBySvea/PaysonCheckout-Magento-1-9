@@ -1,5 +1,4 @@
 <?php
-
 class Payson_Checkout2_Model_Method_Checkout2 extends Mage_Payment_Model_Method_Abstract
 {
     protected $_code = 'checkout2';
@@ -58,14 +57,16 @@ class Payson_Checkout2_Model_Method_Checkout2 extends Mage_Payment_Model_Method_
         return $config->getEnabled();
     }
 
-    public function getConfigPaymentAction() {
+    public function getConfigPaymentAction()
+    {
         return self::ACTION_AUTHORIZE;
     }
 
     /**
      * @inheritDoc
      */
-    public function authorize(Varien_Object $payment, $amount) {
+    public function authorize(Varien_Object $payment, $amount)
+    {
         $orderHelper = Mage::helper('checkout2/order');
         $api = $orderHelper->getApi();
 
@@ -81,14 +82,16 @@ class Payson_Checkout2_Model_Method_Checkout2 extends Mage_Payment_Model_Method_
     /**
      * @inheritDoc
      */
-    public function capture(Varien_Object $payment, $amount) {
+    public function capture(Varien_Object $payment, $amount)
+    {
         return $this;
     }
 
     /**
      * @inheritDoc
      */
-    public function cancel(Varien_Object $payment) {
+    public function cancel(Varien_Object $payment)
+    {
         $order = $payment->getOrder();
         $orderHelper = Mage::helper('checkout2/order');
         $api = $orderHelper->getApi();
@@ -110,14 +113,16 @@ class Payson_Checkout2_Model_Method_Checkout2 extends Mage_Payment_Model_Method_
 	/**
      * @inheritDoc
      */
-    public function void(Varien_Object $payment) {
+    public function void(Varien_Object $payment)
+    {
         $this->cancel($payment);
     }
 
     /**
      * @inheritDoc
      */
-    public function refund(Varien_Object $payment, $amount) {
+    public function refund(Varien_Object $payment, $amount)
+    {
         $order = $payment->getOrder();
         $orderHelper = Mage::helper('checkout2/order');
         $api = $orderHelper->getApi();

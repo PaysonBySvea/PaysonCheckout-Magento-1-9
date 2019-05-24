@@ -1,5 +1,4 @@
 <?php
-
 class Payson_Checkout2_PaymentController extends Mage_Core_Controller_Front_Action
 {
     private $_orderHelper;
@@ -8,7 +7,8 @@ class Payson_Checkout2_PaymentController extends Mage_Core_Controller_Front_Acti
         $this->_orderHelper = Mage::helper('checkout2/order');
     }
 
-    public function newAction() {
+    public function newAction()
+    {
     	if (!$this->_getOrderHelper()->hasOrder()) {
             $this->_redirect('checkout/cart');
 
@@ -23,7 +23,8 @@ class Payson_Checkout2_PaymentController extends Mage_Core_Controller_Front_Acti
         $this->_redirect('checkout2/payment/index');
     }
 
-    public function indexAction() {
+    public function indexAction()
+    {
         if (!$this->_getOrderHelper()->hasOrder()) {
             $this->_redirect('checkout/cart');
 
@@ -34,7 +35,8 @@ class Payson_Checkout2_PaymentController extends Mage_Core_Controller_Front_Acti
         $this->renderLayout();
     }
 
-    public function confirmationAction() {
+    public function confirmationAction()
+    {
     	$checkoutId = Mage::getSingleton('core/session')->getCheckoutId();
 
         if (!$checkoutId) {
@@ -45,7 +47,8 @@ class Payson_Checkout2_PaymentController extends Mage_Core_Controller_Front_Acti
         $this->renderLayout();
     }
 
-    public function cancelAction() {
+    public function cancelAction()
+    {
         $cancelMessage = Mage::helper('checkout2')->__('Order was canceled at Payson.');
         Mage::getSingleton('core/session')->addError($cancelMessage);
 
@@ -54,7 +57,8 @@ class Payson_Checkout2_PaymentController extends Mage_Core_Controller_Front_Acti
         $this->_redirect('checkout2/payment/index');
     }
 
-    public function returnAction() {
+    public function returnAction()
+    {
         $order = $this->_getOrderHelper()->getOrder();
         $checkoutId = $order->getData(Payson_Checkout2_Model_Order::CHECKOUT_ID_COLUMN);
         $api = $this->_getOrderHelper()->getApi();
@@ -133,7 +137,8 @@ class Payson_Checkout2_PaymentController extends Mage_Core_Controller_Front_Acti
         }
     }
 
-    private function _getOrderHelper() {
+    private function _getOrderHelper()
+    {
         return $this->_orderHelper;
     }
 }

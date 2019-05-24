@@ -1,10 +1,11 @@
 <?php
-
 require_once 'Mage/Adminhtml/controllers/Sales/Order/ShipmentController.php';
 
-class Payson_Checkout2_Adminhtml_Sales_Order_ShipmentController extends Mage_Adminhtml_Sales_Order_ShipmentController {
+class Payson_Checkout2_Adminhtml_Sales_Order_ShipmentController extends Mage_Adminhtml_Sales_Order_ShipmentController
+{
 
-    public function saveAction() {
+    public function saveAction()
+    {
 
         $order = Mage::getModel('sales/order')->load($this->getRequest()->getParam('order_id'));
 
@@ -44,16 +45,17 @@ class Payson_Checkout2_Adminhtml_Sales_Order_ShipmentController extends Mage_Adm
         parent::saveAction();
     }
 
-    private function handleWrongOrderStatus($orderId, $currentStatus) {
+    private function handleWrongOrderStatus($orderId, $currentStatus)
+    {
         $errorMessage = Mage::helper('checkout2')->__('Unable to ship order: %s. It must have status "readyToShip" but it´s current status is: "%s".', $orderId, $currentStatus);
         Mage::getSingleton('core/session')->addError($errorMessage);
         $this->_redirectReferer();
     }
 
-    private function handleNoCheckoutId($orderId) {
+    private function handleNoCheckoutId($orderId)
+    {
         $errorMessage = Mage::helper('checkout2')->__('Unable to ship order: %s. No Payson checkout ID was found.', $orderId);
         Mage::getSingleton('core/session')->addError($errorMessage);
         $this->_redirectReferer();
     }
-
 }

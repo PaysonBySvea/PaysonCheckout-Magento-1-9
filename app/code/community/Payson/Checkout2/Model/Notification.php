@@ -1,7 +1,8 @@
 <?php
-
-class Payson_Checkout2_Model_Notification {
-    public function process($checkoutId) {
+class Payson_Checkout2_Model_Notification
+{
+    public function process($checkoutId)
+    {
         $orderHelper = Mage::helper('checkout2/order');
         $api = $orderHelper->getApi();
         $checkout = $api->GetCheckout($checkoutId);

@@ -1,5 +1,4 @@
 <?php
-
 namespace PaysonEmbedded {
     require_once "paysonapiexception.php";
     require_once "paysonapierror.php";
@@ -13,7 +12,8 @@ namespace PaysonEmbedded {
 
 namespace PaysonEmbedded {
 
-    class PaysonApi {
+    class PaysonApi
+    {
 
         private $merchantId;
         private $apiKey;
@@ -31,7 +31,8 @@ namespace PaysonEmbedded {
         private $paysonResponse = NULL;
         public $paysonResponseErrors = array();
 
-        public function __construct($merchantId, $apiKey, $useTestEnvironment = false) {
+        public function __construct($merchantId, $apiKey, $useTestEnvironment = false)
+        {
             $this->useTestEnvironment = $useTestEnvironment;
             $this->merchantId =$merchantId;
             $this->apiKey = $apiKey;
@@ -41,15 +42,18 @@ namespace PaysonEmbedded {
             }
         }
 
-        public function getMerchantId() {
+        public function getMerchantId()
+        {
             return $this->merchantId;
         }
 
-        public function getApiKey() {
+        public function getApiKey()
+        {
             return $this->apiKey;
         }
 
-        public function CreateCheckout(Checkout $checkout) {
+        public function CreateCheckout(Checkout $checkout)
+        {
             $result = $this->doCurlRequest('POST', $this->getUrl(self::ACTION_CHECKOUTS), $checkout->toArray());
             $checkoutId = $this->extractCheckoutId($result);
             if(!$checkoutId) {
@@ -58,7 +62,8 @@ namespace PaysonEmbedded {
             return $checkoutId;
         }
         
-        public function UpdateCheckout($checkout) {
+        public function UpdateCheckout($checkout)
+        {
             if(!$checkout->id) {
                 throw new PaysonApiException("Checkout object which should be updated must have id property set");
             }
@@ -66,27 +71,32 @@ namespace PaysonEmbedded {
             return $checkout;
         }
         
-        public function GetCheckout($checkoutId) {
+        public function GetCheckout($checkoutId)
+        {
             $result = $this->doCurlRequest('GET', $this->getUrl(self::ACTION_CHECKOUTS).$checkoutId, null);
             return Checkout::create(json_decode($result));
         }
         
-        public function ShipCheckout(Checkout $checkout) {
+        public function ShipCheckout(Checkout $checkout)
+        {
             $checkout->status = 'shipped';
             return $this->UpdateCheckout($checkout);
         }
         
-        public function CancelCheckout(Checkout $checkout) {
+        public function CancelCheckout(Checkout $checkout)
+        {
             $checkout->status = 'canceled';
             return $this->UpdateCheckout($checkout);
         }
         
-        public function Validate() {
+        public function Validate()
+        {
             $result = $this->doCurlRequest('GET', $this->getUrl(self::ACTION_ACCOUNTS), null);
             return Account::create(json_decode($result));
         }
 
-        private function doCurlRequest($method, $url, $postfields) {
+        private function doCurlRequest($method, $url, $postfields)
+        {
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_HTTPHEADER, $this->authorizationHeader());
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -127,7 +137,8 @@ namespace PaysonEmbedded {
             
         }
         
-        private function authorizationHeader() {
+        private function authorizationHeader()
+        {
             $header = array();
             $header[] = 'Content-Type: application/json';
             $header[] = 'Authorization: Basic ' . base64_encode($this->merchantId . ':' . $this->apiKey);
@@ -135,7 +146,8 @@ namespace PaysonEmbedded {
         }
 
 
-        private function extractCheckoutId($result) {
+        private function extractCheckoutId($result)
+        {
             $checkoutId = null;
             if (preg_match('#Location: (.*)#', $result, $res)) {
                 $checkoutId = trim($res[1]);
@@ -145,7 +157,8 @@ namespace PaysonEmbedded {
             return $checkoutId;
         }
 
-        private function parseErrors($responseErrors, $response_code) {
+        private function parseErrors($responseErrors, $response_code)
+        {
             $errors = array();
             foreach ($responseErrors as $error) {
                 $errors[] = new PaysonApiError($error['message'], (isset($error['property'])?$error['property']:null));
@@ -153,15 +166,14 @@ namespace PaysonEmbedded {
             return $errors;
         }
 
-        public function setStatus($status) {
+        public function setStatus($status)
+        {
             $this->allOrderData['status'] = $status;
         }
         
-        private function getUrl($action) {
+        private function getUrl($action)
+        {
             return (sprintf($this->protocol, ($this->useTestEnvironment ? 'test-' : '')) . self::PAYSON_HOST.$action);
         }
-
-
     }
-
 }

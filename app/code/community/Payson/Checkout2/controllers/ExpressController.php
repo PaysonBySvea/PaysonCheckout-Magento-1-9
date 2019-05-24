@@ -1,14 +1,15 @@
 <?php
-
 class Payson_Checkout2_ExpressController extends Mage_Core_Controller_Front_Action
 {
     private $_orderHelper;
     
-    public function _construct() {
+    public function _construct() 
+    {
         $this->_orderHelper = Mage::helper('checkout2/order');
     }
 
-    public function newAction() {
+    public function newAction()
+    {
     	if (!$this->_getOrderHelper()->hasActiveQuote()) {
             $this->_redirect('checkout/cart');
 
@@ -23,7 +24,8 @@ class Payson_Checkout2_ExpressController extends Mage_Core_Controller_Front_Acti
         $this->_redirect('checkout2/express/index');
     }
 
-    public function indexAction() {
+    public function indexAction()
+    {
         if (!$this->_getOrderHelper()->hasActiveQuote()) {
             $this->_redirect('checkout/cart');
 
@@ -34,14 +36,16 @@ class Payson_Checkout2_ExpressController extends Mage_Core_Controller_Front_Acti
         $this->renderLayout();
     }
 
-    public function cancelAction() {
+    public function cancelAction()
+    {
         $cancelMessage = Mage::helper('checkout2')->__('Order was canceled at Payson.');
         Mage::getSingleton('core/session')->addError($cancelMessage);
 
         $this->_redirect('checkout2/express/index');
     }
 
-    public function returnAction() {
+    public function returnAction()
+    {
         $quote = $this->_getOrderHelper()->getQuote();
 
         $checkoutId = $quote->getData(Payson_Checkout2_Model_Order::CHECKOUT_ID_COLUMN);
@@ -121,7 +125,8 @@ class Payson_Checkout2_ExpressController extends Mage_Core_Controller_Front_Acti
         }
     }
 
-    public function updateAction() {
+    public function updateAction()
+    {
     	if (!$this->getRequest()->isXmlHttpRequest()) {
     		return;
 		}
@@ -216,7 +221,8 @@ class Payson_Checkout2_ExpressController extends Mage_Core_Controller_Front_Acti
         }
     }
 
-    private function _isPaymentMethodAmongRates($code, $rates) {
+    private function _isPaymentMethodAmongRates($code, $rates)
+    {
         foreach ($rates as $index => $rate) {
             if ($rate->getCode() == $code) {
                 return true;
@@ -226,11 +232,13 @@ class Payson_Checkout2_ExpressController extends Mage_Core_Controller_Front_Acti
         return false;
     }
 
-    private function _getOrderHelper() {
+    private function _getOrderHelper()
+    {
         return $this->_orderHelper;
     }
 
-    private function _getQuote() {
+    private function _getQuote()
+    {
         return Mage::getSingleton('checkout/cart')->getQuote();
     }
 }

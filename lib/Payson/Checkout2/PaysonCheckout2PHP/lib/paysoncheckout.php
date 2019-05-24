@@ -1,6 +1,7 @@
 <?php
 namespace PaysonEmbedded {
-    class Checkout {
+    class Checkout
+    {
         /** @var Merchant $merchant */
         public $merchant;
         
@@ -28,7 +29,8 @@ namespace PaysonEmbedded {
         /** @var string $description */
         public $description;
        
-        public function __construct(Merchant $merchant, PayData $payData,  Gui $gui = null,  Customer $customer = null, $description = '') {
+        public function __construct(Merchant $merchant, PayData $payData,  Gui $gui = null,  Customer $customer = null, $description = '')
+        {
             $this->merchant = $merchant;
             $this->payData = $payData;
             $this->gui = $gui?:new Gui();
@@ -37,7 +39,8 @@ namespace PaysonEmbedded {
             $this->description = $description;
         }
         
-        public static function create($data) {
+        public static function create($data)
+        {
             $checkout = new Checkout(Merchant::create($data->merchant), PayData::create($data->order), Gui::create($data->gui), Customer::create($data->customer));
             $checkout->status = $data->status;
             $checkout->id = $data->id;
@@ -52,7 +55,8 @@ namespace PaysonEmbedded {
             return $checkout;
         }
       
-        public function toArray() {
+        public function toArray()
+        {
             return array(
                 'id' => $this->id,
                 'description' => $this->description,

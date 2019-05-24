@@ -1,6 +1,6 @@
 <?php
-
-class Payson_Checkout2_Model_Config {
+class Payson_Checkout2_Model_Config
+{
     /*
      * Private properties
      */
@@ -31,7 +31,8 @@ class Payson_Checkout2_Model_Config {
      *
      * @return	void
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->setDefaultStoreId(Mage::app()->getStore()->getId());
     }
 
@@ -41,7 +42,8 @@ class Payson_Checkout2_Model_Config {
      * @param	int		$store
      * @return	object			$this
      */
-    public function setDefaultStoreId($store) {
+    public function setDefaultStoreId($store)
+    {
         $this->default_store_id = $store;
 
         return $this;
@@ -52,7 +54,8 @@ class Payson_Checkout2_Model_Config {
      *
      * @return	int
      */
-    public function getDefaultStoreId() {
+    public function getDefaultStoreId()
+    {
         return $this->default_store_id;
     }
 
@@ -62,7 +65,8 @@ class Payson_Checkout2_Model_Config {
      * @param	string	$currency
      * @return	bool
      */
-    public function isCurrencySupported($currency) {
+    public function isCurrencySupported($currency)
+    {
         return in_array(strtoupper($currency), $this->supported_currencies);
     }
 
@@ -74,7 +78,8 @@ class Payson_Checkout2_Model_Config {
      * @param	mixed		$default	[optional]
      * @param	string		$prefix		[optional]
      */
-    public function getConfig($name, $store = null, $default = null, $prefix = 'payment/checkout2/') {
+    public function getConfig($name, $store = null, $default = null, $prefix = 'payment/checkout2/')
+    {
         if (!isset($store)) {
             $store = $this->getDefaultStoreId();
         }
@@ -88,47 +93,58 @@ class Payson_Checkout2_Model_Config {
     /**
      * @see getConfig
      */
-    public function get($name, $store = null, $default = null, $prefix = 'payment/checkout2/') {
+    public function get($name, $store = null, $default = null, $prefix = 'payment/checkout2/')
+    {
         return $this->getConfig($name, $store, $default, $prefix);
     }
 
-    public function restoreCartOnCancel() {
+    public function restoreCartOnCancel()
+    {
         return $this->get('restore_on_cancel');
     }
 
-    public function restoreCartOnError() {
+    public function restoreCartOnError()
+    {
         return $this->get('restore_on_error');
     }
 
-    public function getTestMode() {
+    public function getTestMode()
+    {
         return $this->get('test_mode');
     }
 
-    public function getEnabled() {
+    public function getEnabled()
+    {
         return $this->get('active');
     }
 
-    public function getAgentID() {
+    public function getAgentID()
+    {
         return $this->get('agent_id');
     }
 
-    public function getApiKey() {
+    public function getApiKey()
+    {
         return $this->get('md5_key');
     }
 
-    public function getTermsUrl() {
+    public function getTermsUrl()
+    {
         return $this->get('terms_and_conditions_url');
     }
 
-    public function getTheme() {
+    public function getTheme()
+    {
         return $this->get('checkout_theme');
     }
 
-    public function getExtraVerification() {
+    public function getExtraVerification()
+    {
         return $this->get('extra_verification');
     }
 
-    public function getRequestPhone() {
+    public function getRequestPhone()
+    {
         return $this->get('request_phone');
     }
 }

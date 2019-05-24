@@ -1,5 +1,4 @@
 <?php
-
 require_once(Mage::getBaseDir('lib') . '/Payson/Checkout2/PaysonCheckout2PHP/lib/paysonapi.php');
 
 class Payson_Checkout2_Block_Payment extends Mage_Core_Block_Template
@@ -9,7 +8,8 @@ class Payson_Checkout2_Block_Payment extends Mage_Core_Block_Template
      */
     protected $_orderHelper;
 
-    public function _construct() {
+    public function _construct()
+    {
         $this->_orderHelper = Mage::helper('checkout2/order');
     }
 

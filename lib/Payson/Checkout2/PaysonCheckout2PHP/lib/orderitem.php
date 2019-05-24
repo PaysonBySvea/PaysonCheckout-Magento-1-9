@@ -8,7 +8,8 @@ namespace PaysonEmbedded{
         const SERVICE = 'service';
     }
     
-    class OrderItem {
+    class OrderItem
+    {
         
         /** @var string $id */
         public $itemId;
@@ -46,7 +47,8 @@ namespace PaysonEmbedded{
         * @param float $taxRate Tax value. Not actual percentage. For example, 25% has to be entered as 0.25
         * @param string $reference Sku of item
         */
-        public function __construct($name, $unitPrice, $quantity, $taxRate, $reference, $type=OrderItemType::PHYSICAL, $discountRate=null, $ean = null, $uri=null, $imageUri=null) {
+        public function __construct($name, $unitPrice, $quantity, $taxRate, $reference, $type=OrderItemType::PHYSICAL, $discountRate=null, $ean = null, $uri=null, $imageUri=null)
+        {
             // Mandatory 
             $this->name = $name;
             $this->unitPrice = $unitPrice;
@@ -66,7 +68,8 @@ namespace PaysonEmbedded{
             $this->imageUri = $imageUri;
         }
 
-        public static function create($data) {
+        public static function create($data)
+        {
             $item = new OrderItem($data->name, $data->unitPrice, $data->quantity, $data->taxRate, $data->reference, $data->type, isset($data->discountRate)?$data->discountRate:null, isset($data->ean)?$data->ean:null, isset($data->uri)?$data->uri:null, isset($data->imageUri)?$data->imageUri:null);
             $item->discountRate=$data->discountRate;
             $item->creditedAmount=$data->creditedAmount;
@@ -76,7 +79,8 @@ namespace PaysonEmbedded{
             return $item;
         }
         
-        public function toArray() {
+        public function toArray()
+        {
             return get_object_vars($this);   
         }
     }

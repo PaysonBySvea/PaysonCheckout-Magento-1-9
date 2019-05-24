@@ -1,6 +1,7 @@
 <?php
 namespace PaysonEmbedded {
-    class Merchant {
+    class Merchant
+    {
         /** @var url $checkoutUri URI to the merchants checkout page.*/
         public $checkoutUri = NULL;
         /** @var url $confirmationUri URI to the merchants confirmation page. */
@@ -18,7 +19,8 @@ namespace PaysonEmbedded {
         /** @var string $integrationInfo Information about the integration. */
         public $integrationInfo = NULL;
 
-        public function __construct($checkoutUri, $confirmationUri, $notificationUri, $termsUri, $partnerId = NULL, $integrationInfo = 'PaysonCheckout2.0|1.0|NONE') {
+        public function __construct($checkoutUri, $confirmationUri, $notificationUri, $termsUri, $partnerId = NULL, $integrationInfo = 'PaysonCheckout2.0|1.0|NONE')
+        {
             $this->checkoutUri = $checkoutUri;
             $this->confirmationUri = $confirmationUri;
             $this->notificationUri = $notificationUri;
@@ -27,14 +29,16 @@ namespace PaysonEmbedded {
             $this->integrationInfo = $integrationInfo;
         }
         
-        public static function create($data) {
+        public static function create($data)
+        {
             $merchant =  new Merchant($data->checkoutUri,$data->confirmationUri,$data->notificationUri,$data->termsUri, $data->partnerId, $data->integrationInfo);
             $merchant->reference=$data->reference;
             $merchant->validationUri=$data->validationUri;
             return $merchant;
         }
      
-        public function toArray(){
+        public function toArray()
+        {
             return get_object_vars($this);      
         }
     }

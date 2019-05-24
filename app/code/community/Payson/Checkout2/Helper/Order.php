@@ -1,5 +1,4 @@
 <?php
-
 require_once(Mage::getBaseDir('lib') . '/Payson/Checkout2/PaysonCheckout2PHP/lib/paysonapi.php');
 
 class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
@@ -12,7 +11,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
     const MODULE_NAME = 'PaysonCheckout2.0_magento';
     const MODULE_VERSION = '1.0.0.5';
 
-    public function checkout() {
+    public function checkout()
+    {
         $order = $this->getOrder();
 
         $checkoutId = $order->getData(Payson_Checkout2_Model_Order::CHECKOUT_ID_COLUMN);
@@ -54,7 +54,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         return $callPaysonApi->GetCheckout($checkoutId);
     }
 
-    public function expressCheckout() {
+    public function expressCheckout()
+    {
         $quote = Mage::getModel('checkout/cart')->getQuote();
 
         $checkoutId = $quote->getData(Payson_Checkout2_Model_Order::CHECKOUT_ID_COLUMN);
@@ -101,7 +102,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         return $callPaysonApi->GetCheckout($checkoutId);
     }
 
-    public function updateExpressCheckout() {
+    public function updateExpressCheckout()
+    {
         $quote = Mage::getModel('checkout/cart')->getQuote();
         $checkoutId = $quote->getData(Payson_Checkout2_Model_Order::CHECKOUT_ID_COLUMN);
 
@@ -130,17 +132,20 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         return $checkout;
     }
 
-    public function updateCheckoutControlKey($checkoutId) {
+    public function updateCheckoutControlKey($checkoutId)
+    {
         $this->_controlKey = Mage::helper('core')->getRandomString($length = 8);
         $domain = null;
         Mage::getSingleton('core/cookie')->set($checkoutId, $this->_controlKey, 3600, '/', $domain, false, false);
     }
 
-    public function removeCheckoutControlKey($checkoutId) {
+    public function removeCheckoutControlKey($checkoutId)
+    {
         Mage::getSingleton('core/cookie')->delete($checkoutId);
     }
 
-    public function getCheckoutControlKey($checkoutId) {
+    public function getCheckoutControlKey($checkoutId)
+    {
         $key = Mage::getSingleton('core/cookie')->get($checkoutId);
 
         if (!$key) {
@@ -150,7 +155,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         return $key;
     }
 
-    private function _getOrderPayData() {
+    private function _getOrderPayData()
+    {
         $order = $this->getOrder();
         $payData = new PaysonEmbedded\PayData($order->getOrderCurrency()->getCode());
 
@@ -173,7 +179,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         return $payData;
     }
 
-    private function _getQuotePayData() {
+    private function _getQuotePayData()
+    {
         $quote = Mage::getModel('checkout/cart')->getQuote();
         $payData = new PaysonEmbedded\PayData($quote->getQuoteCurrencyCode());
 
@@ -181,12 +188,14 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         $discount = 0;
 
         // Add items and discount
-        foreach ($quote->getAllVisibleItems() as $item) {
+        foreach ($quote->getAllVisibleItems() as $item)
+        {
             $this->prepareQuoteItemData($item, $payData);
             $discount += $item->getDiscountAmount();
         }
 
-        if ($discount > 0) {
+        if ($discount > 0)
+        {
             $payData->AddOrderItem(new PaysonEmbedded\OrderItem('discount', -$discount, 1, 0.1, 'a', PaysonEmbedded\OrderItemType::DISCOUNT));
         }
 
@@ -196,7 +205,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         return $payData;
     }
 
-    private function _getMerchant() {
+    private function _getMerchant()
+    {
         // URLs used by payson for redirection after a completed/canceled/notification purchase.
         $checkoutUri     = Mage::getUrl('checkout2/payment/cancel', array('_secure' => true));
         $confirmationUri = Mage::getUrl('checkout2/payment/return', array('_secure' => true));
@@ -206,7 +216,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         return new PaysonEmbedded\Merchant($checkoutUri, $confirmationUri, $notificationUri, $termsUri, 1);
     }
 
-    private function _getExpressMerchant() {
+    private function _getExpressMerchant()
+    {
         // URLs used by payson for redirection after a completed/canceled/notification purchase.
         $checkoutUri     = Mage::getUrl('checkout2/express/cancel', array('_secure' => true));
         $confirmationUri = Mage::getUrl('checkout2/express/return', array('_secure' => true));
@@ -220,7 +231,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
     /**
      * @return \PaysonEmbedded\PaysonApi
      */
-    public function getApi() {
+    public function getApi()
+    {
         if (is_null($this->_api)) {
             $testMode = $this->getConfig()->getTestMode();
             $merchantId = $this->getConfig()->getAgentId();
@@ -236,7 +248,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
      * @param $checkoutId
      * @return PaysonEmbedded\Checkout
      */
-    public function getCheckout($checkoutId) {
+    public function getCheckout($checkoutId)
+    {
         return $this->getApi()->GetCheckout($checkoutId);
     }
 
@@ -245,7 +258,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
      *
      * @return Payson_Checkout2_Model_Config
      */
-    protected function getConfig() {
+    protected function getConfig()
+    {
         if (empty($this->_config)) {
             $this->_config = Mage::getModel('checkout2/config');
         }
@@ -257,7 +271,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
      *
      *  @return  Mage_Sales_Model_Order
      */
-    public function getOrder() {
+    public function getOrder()
+    {
         if (!isset($this->_order)) {
             $increment_id = $this->_getSession()->getData('last_real_order_id');
 
@@ -274,7 +289,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         return $this->_order;
     }
 
-    public function getQuote() {
+    public function getQuote()
+    {
         return Mage::getSingleton('checkout/cart')->getQuote();
     }
 
@@ -283,7 +299,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
      *
      *  @return  boolean
      */
-    public function hasOrder() {
+    public function hasOrder()
+    {
         return !is_null($this->getOrder());
     }
 
@@ -292,7 +309,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
      *
      *  @return  boolean
      */
-    public function hasActiveQuote() {
+    public function hasActiveQuote()
+    {
         return Mage::helper('checkout/cart')->getItemsCount() > 0;
     }
 
@@ -301,7 +319,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
      *
      * @return string
      */
-    protected function getLocale() {
+    protected function getLocale()
+    {
         $locale = Mage::getSingleton('core/locale')->getLocaleCode();
         $locale = substr($locale, 0, 2);
 
@@ -326,7 +345,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
      *
      * @return string
      */
-    protected function getLenguageCode() {
+    protected function getLenguageCode()
+    {
         $locale = Mage::getSingleton('core/locale')->getLocaleCode();
         $locale = substr($locale, 0, 2);
 
@@ -354,7 +374,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
      * @param	PaysonEmbedded\PayData		$payData
      * @return	void
      */
-    protected function prepareOrderItemData($item, &$payData) {
+    protected function prepareOrderItemData($item, &$payData)
+    {
         /* @var $product Mage_Catalog_Model_Product */
         $product = Mage::getModel('catalog/product')
             ->load($item->getProductId());
@@ -399,7 +420,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         $payData->AddOrderItem(new PaysonEmbedded\OrderItem($name, $price, $qty, $tax_mod, $sku));
     }
 
-    protected function prepareQuoteItemData($item, &$payData) {
+    protected function prepareQuoteItemData($item, &$payData)
+    {
         /* @var $product Mage_Catalog_Model_Product */
         $product = Mage::getModel('catalog/product')
             ->load($item->getProductId());
@@ -457,7 +479,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
      * @param	int		$i
      * @param	int		$total
      */
-    protected function prepareOrderShippingData($order, &$payData) {
+    protected function prepareOrderShippingData($order, &$payData)
+    {
         $tax_calc = Mage::getSingleton('tax/calculation');
 
         $store = Mage::app()->getStore($order->getStoreId());
@@ -481,7 +504,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         }
     }
 
-    protected function prepareQuoteShippingData($quote, &$payData) {
+    protected function prepareQuoteShippingData($quote, &$payData)
+    {
         $tax_calc = Mage::getSingleton('tax/calculation');
 
         $store = Mage::app()->getStore($quote->getStoreId());
@@ -510,7 +534,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
      *
      * @return \PaysonEmbedded\Customer
      */
-    private function initCustomer() {
+    private function initCustomer()
+    {
         $order = $this->getOrder();
         $testMode = $this->getConfig()->getTestMode();
         $customer = Mage::getModel('customer/customer')->load($order->getCustomerId());
@@ -548,7 +573,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         return new PaysonEmbedded\Customer($firstname, $lastname, $email, $telephone, $socialSecurityNo, $city, $country, $postCode, $street);
     }
 
-    private function _initExpressCustomer() {
+    private function _initExpressCustomer()
+    {
         $quote = Mage::getModel('checkout/cart')->getQuote();
 
         $testMode = $this->getConfig()->getTestMode();
@@ -592,7 +618,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
     /**
      * Restores cart
      */
-    public function restoreCart() {
+    public function restoreCart()
+    {
         $quoteId = $this->getOrder()->getQuoteId();
         $quote = Mage::getModel('sales/quote')->load($quoteId);
         $quote->setIsActive(true)->save();
@@ -604,7 +631,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
      * @param      string  $message  A descriptive message
      *
      */
-    public function cancelOrder($message = '') {
+    public function cancelOrder($message = '')
+    {
 
         $order = $this->getOrder();
 
@@ -623,7 +651,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         $order->save();
     }
 
-    private function _getSession() {
+    private function _getSession()
+    {
         if (!isset($this->_session)) {
             $this->_session = Mage::getSingleton('checkout/session');
         }
@@ -631,7 +660,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         return $this->_session;
     }
     
-    public function convertQuoteToOrder($paysonCustomer) {
+    public function convertQuoteToOrder($paysonCustomer)
+    {
         $quote = Mage::getSingleton('checkout/cart')->getQuote();
 
         if (is_null($quote)) {
@@ -654,7 +684,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         return $order;
     }
 
-    private function _setDefaultShipping($quote) {
+    private function _setDefaultShipping($quote)
+    {
         $shippingAddress = $quote->getShippingAddress();
         $shippingMethod = $shippingAddress->getShippingMethod();
             
@@ -686,7 +717,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         $quote->setTotalsCollectedFlag(false)->collectTotals();
     }
 
-    private function _udateShippingAddress($paysonCustomer) {
+    private function _udateShippingAddress($paysonCustomer)
+    {
             return array(
                 'firstname' => $paysonCustomer->firstName,
                 'lastname' => $paysonCustomer->lastName,
