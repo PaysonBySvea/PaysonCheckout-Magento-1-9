@@ -9,7 +9,7 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
     protected $controlKey;
 
     const MODULE_NAME = 'PaysonCheckout2.0_magento';
-    const MODULE_VERSION = '1.0.0.5';
+    const MODULE_VERSION = '1.0.0.6';
 
     public function checkout()
     {
@@ -91,6 +91,11 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
         $quote->setData(Payson_Checkout2_Model_Order::CHECKOUT_ID_COLUMN, $checkoutId);
         //Set the email to the gest account Information
         $quote->setCustomerEmail($customer->email);
+        $quote->setCustomerFirstname($customer->firstName);
+        $quote->setCustomerLastname($customer->lastName);
+
+
+
         $quote->save();
 
         $this->updateCheckoutControlKey($checkoutId);
