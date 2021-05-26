@@ -9,7 +9,7 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
     protected $controlKey;
 
     const MODULE_NAME = 'PaysonCheckout2.0_magento';
-    const MODULE_VERSION = '1.0.0.6';
+    const MODULE_VERSION = '1.0.0.7';
 
     public function checkout()
     {
@@ -726,7 +726,8 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
     {
             return array(
                 'firstname' => $paysonCustomer->firstName,
-                'lastname' => $paysonCustomer->lastName,
+                //'lastname' => $paysonCustomer->lastName,
+                'lastname' => $paysonCustomer->type == 'business' ? $paysonCustomer->firstName : $paysonCustomer->lastName,
                 'street' => $paysonCustomer->street,
                 'city' => $paysonCustomer->city,
                 'postcode'=> $paysonCustomer->postalCode,
