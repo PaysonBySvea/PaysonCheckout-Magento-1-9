@@ -9,7 +9,7 @@ class Payson_Checkout2_Helper_Order extends Mage_Core_Helper_Abstract
     protected $controlKey;
 
     const MODULE_NAME = 'PaysonCheckout2.0_magento';
-    const MODULE_VERSION = '1.0.0.7';
+    const MODULE_VERSION = '1.0.0.8';
 
     public function checkout()
     {

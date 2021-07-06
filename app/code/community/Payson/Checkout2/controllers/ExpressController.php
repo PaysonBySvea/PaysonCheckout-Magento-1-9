@@ -62,7 +62,7 @@ class Payson_Checkout2_ExpressController extends Mage_Core_Controller_Front_Acti
 
                 // Send order reference to Payson
                 $checkout->merchant->reference = $order->getIncrementId();
-                $api->UpdateCheckout($checkout);
+                //$api->UpdateCheckout($checkout);
 
                 $successMessage = Mage::helper('checkout2')->__('The payment was successfully completed at Payson.');
 
